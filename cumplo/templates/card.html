@@ -1,0 +1,19 @@
+{% block container %}
+    <div class="Badge">
+        <div class="container">
+            <div class="Badge__section-name">
+                <h1>Tasa máxima convencional </h1>
+                <h3>{{ res.Valor }}</h3>
+            </div>
+
+
+            <div class="Badge__section-info">
+                <h2>Descripcion : </h2>
+                <div>{{ res.Titulo }}</div>
+            </div>
+            <div class="Badge__section-info">
+                <div>{{ res.SubTitulo }}</div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

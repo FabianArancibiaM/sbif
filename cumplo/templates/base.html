@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% block head_content %}{% endblock %}
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+</head>
+<body style="background: ghostwhite;">
+
+{% include "nav.html" %}
+
+<div>
+    {% block container %}
+        {% if error %}
+            {% include "error.html" %}
+        {% endif %}
+
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="card col-6">
+                    <div class="card-header">
+                        <h1 style="text-align: center">Buscador TCM</h1>
+                    </div>
+                    <div class="card-body">
+                        {% include "form.html" %}
+                    </div>
+                </div>
+
+                <div class="col-6">
+                    {% if result %}
+                        <div class="BadgesList">
+                            <ul class="list-unstyled">
+                                {% for res in result %}
+                                    <li>
+                                        {% include "card.html" %}
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% endif %}
+                </div>
+
+            </div>
+        </div>
+
+    {% endblock %}
+</div>
+
+<footer class=" blockquote-footer footer"> <cite title="Source Title" style="font-size: xx-large">Developer Fabian Arancibia</cite></footer>
+
+</body>
+</html>
