@@ -1,1 +1,1 @@
-web: gunicorn cumplo.cumplo.wsgi.py --log-file -
+web: gunicorn cumplo.wsgi.py --log-file -
