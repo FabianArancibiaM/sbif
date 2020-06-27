@@ -1,3 +1,6 @@
+LISTADO_CODIGO_REAJUSTABLE = [12,13,14,15,20,21,22,23,24,40]
+
+LISTADO_CODIGO_NO_REAJUSTABLE = [1,2,3,4,5,6,7,8,9,10,11,25,26,27,28,29,30,31,32,33,34,35,37,39,44,45]
 
 LISTADO_REGLAS = [
     {
@@ -18,7 +21,7 @@ LISTADO_REGLAS = [
     },
     {
         'codigo': '5', 'dia': [{'dias': 90, 'condicion': 'Mayor igual'}],
-        'uf': [{'uf': 200, 'condicion': 'Menor igual'},{'uf': 100, 'condicion': 'Mayor que'}]
+        'uf': [{'uf': 200, 'condicion': 'Menor igual'}, {'uf': 100, 'condicion': 'Mayor que'}]
     },
     {
         'codigo': '6', 'dia': [{'dias': 90, 'condicion': 'Mayor igual'}],
@@ -30,7 +33,7 @@ LISTADO_REGLAS = [
     },
     {
         'codigo': '8', 'dia': [{'dias': 90, 'condicion': 'Mayor igual'}],
-        'uf': [{'uf': 5000, 'condicion': 'Menor igual'},{'uf': 200, 'condicion': 'Mayor que'}]
+        'uf': [{'uf': 5000, 'condicion': 'Menor igual'}, {'uf': 200, 'condicion': 'Mayor que'}]
     },
     {
         'codigo': '9', 'dia': [{'dias': 90, 'condicion': 'Mayor igual'}],
@@ -56,7 +59,7 @@ LISTADO_REGLAS = [
         'codigo': '14', 'dia': [{'dias': 365, 'condicion': 'Mayor igual'}],
         'uf': [{'uf': 2000, 'condicion': 'Mayor que'}]
     }
-    ,{
+    , {
         'codigo': '15', 'dia': None,
         'uf': None
     },
@@ -90,7 +93,7 @@ LISTADO_REGLAS = [
     },
     {
         'codigo': '27', 'dia': [{'dias': 90, 'condicion': 'Mayor igual'}],
-        'uf': [{'uf': 5000, 'condicion': 'Menor igual'},{'uf': 200, 'condicion': 'Mayor que'}]
+        'uf': [{'uf': 5000, 'condicion': 'Menor igual'}, {'uf': 200, 'condicion': 'Mayor que'}]
     },
     {
         'codigo': '28', 'dia': [{'dias': 90, 'condicion': 'Mayor igual'}],
@@ -106,7 +109,7 @@ LISTADO_REGLAS = [
     },
     {
         'codigo': '31', 'dia': [{'dias': 90, 'condicion': 'Mayor igual'}],
-        'uf': [{'uf': 200, 'condicion': 'Menor igual'},{'uf': 100, 'condicion': 'Mayor que'}]
+        'uf': [{'uf': 200, 'condicion': 'Menor igual'}, {'uf': 100, 'condicion': 'Mayor que'}]
     },
     {
         'codigo': '32', 'dia': [{'dias': 90, 'condicion': 'Mayor igual'}],
@@ -122,11 +125,11 @@ LISTADO_REGLAS = [
     },
     {
         'codigo': '35', 'dia': [{'dias': 90, 'condicion': 'Mayor igual'}],
-        'uf': [{'uf': 5000, 'condicion': 'Menor igual'},{'uf': 200, 'condicion': 'Mayor que'}]
+        'uf': [{'uf': 5000, 'condicion': 'Menor igual'}, {'uf': 200, 'condicion': 'Mayor que'}]
     },
     #    {
     #   'codigo': '36', 'dia': None,
-#   'uf': None
+    #   'uf': None
     #   },
     {
         'codigo': '37', 'dia': [{'dias': 90, 'condicion': 'Menor que'}],
@@ -134,31 +137,31 @@ LISTADO_REGLAS = [
     },
     # {
     #    'codigo': '38', 'dia': None,
-#    'uf': None
+    #    'uf': None
     #    },
     {
         'codigo': '39', 'dia': [{'dias': 90, 'condicion': 'Mayor igual'}],
         'uf': None
     },
-     {
+    {
         'codigo': '40', 'dia': None,
         'uf': None
-     },
+    },
     #  {
     #    'codigo': '41', 'dia': None,
-#     'uf': [{'uf': 2000, 'condicion': 'Menor igual'}]
+    #     'uf': [{'uf': 2000, 'condicion': 'Menor igual'}]
     # },
     #  {
     #    'codigo': '42', 'dia': None,
-#     'uf': [{'uf': 2000, 'condicion': 'Mayor que'}]
-#  },
-     #{
+    #     'uf': [{'uf': 2000, 'condicion': 'Mayor que'}]
+    #  },
+    # {
     #   'codigo': '43', 'dia': None,
-#   'uf': None
+    #   'uf': None
     # },
     {
         'codigo': '44', 'dia': [{'dias': 90, 'condicion': 'Mayor igual'}],
-        'uf': [{'uf': 200, 'condicion': 'Menor igual'},{'uf': 50, 'condicion': 'Mayor que'}]
+        'uf': [{'uf': 200, 'condicion': 'Menor igual'}, {'uf': 50, 'condicion': 'Mayor que'}]
     },
     {
         'codigo': '45', 'dia': [{'dias': 90, 'condicion': 'Mayor igual'}],
