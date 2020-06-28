@@ -74,7 +74,7 @@ def valid_request(request):
             error.append("Valor UF.")
     except ValueError:
         error.append("Valor UF.")
-    if error is None:
+    if not error:
         return None
     texto = "Informacion incorrecta : "
     for x in error:
