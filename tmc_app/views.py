@@ -58,23 +58,28 @@ def valida_condition(condition, entry, type):
 
 # method that validates data entered from the form
 def valid_request(request):
+    error=[]
     try:
         if int(request.POST['plazo']) <= 0:
-            return message_error("Dias de atraso incorrecto.")
+            error.append("Dias de atraso.")
     except ValueError:
-        return message_error("Dias de atraso incorrecto.")
+        error.append("Dias de atraso.")
     try:
         datetime.strptime(request.POST['fecha'], "%Y-%m-%d").date()
     except ValueError:
-        return message_error("Fecha ingresada incorrecta.")
+        error.append("Fecha.")
     try:
         new_float = float(request.POST['uf'])
         if new_float <= 0:
-            return message_error("Valor UF no valido.")
+            error.append("Valor UF.")
     except ValueError:
-        return message_error("Valor UF no valido.")
-    return None
-
+        error.append("Valor UF.")
+    if error is None:
+        return None
+    texto = "Los siguientes campos tienen errores: "
+    for x in error:
+        texto = texto+" "+ x
+    return message_error(texto)
 
 def valid_code(cod, exampleRadios):
     if exampleRadios == 'option1':
