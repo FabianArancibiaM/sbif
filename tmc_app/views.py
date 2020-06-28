@@ -58,7 +58,10 @@ def valida_condition(condition, entry, type):
 
 # method that validates data entered from the form
 def valid_request(request):
-    if int(request.POST['plazo']) <= 0:
+    try:
+        if int(request.POST['plazo']) <= 0:
+            return message_error("Dias de atraso incorrecto.")
+    except ValueError:
         return message_error("Dias de atraso incorrecto.")
     try:
         datetime.strptime(request.POST['fecha'], "%Y-%m-%d").date()
