@@ -5,8 +5,8 @@
             <div class="form-group col-md-12">
                 <label>Ingresar monto UF :</label>
                 <input class="form-control" type="text" id="uf" name="uf" value="{{ request.uf }}" required
-                       onkeypress="return soloNumeros1(event)" onkeyup="floatCelular(event)"/>
-                <label id="soloNumero1" style="display: none">solo numeros con decimal</label>
+                       onkeypress="return soloNumeros1(event)" onkeyup="soloNumeros1(event)"/>
+                <label id="soloNumero1" style="display: none">solo numeros y decimales</label>
             </div>
 
             <div class="form-group col-md-12">
@@ -100,15 +100,6 @@
         sp = document.getElementById('soloNumero2');
         patron = /^[0-9]+$/;
         return soloNumeros(e, sp,patron)
-    }
-
-    function floatCelular(event) {
-        sp = document.getElementById('soloNumero1');
-        val = parseFloat(sp.value)
-        if (isNaN(val)){
-            return sp.setAttribute('style', 'display:block;color: red;font-size: 14px;');
-        }
-        return val;
     }
 
     function soloNumeros(e, sp, regex) {
