@@ -76,7 +76,7 @@ def valid_request(request):
         error.append("Valor UF.")
     if error is None:
         return None
-    texto = "Los siguientes campos tienen errores: "
+    texto = "Informacion incorrecta : "
     for x in error:
         texto = texto+" "+ x
     return message_error(texto)
