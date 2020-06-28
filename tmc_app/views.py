@@ -2,10 +2,9 @@ from datetime import datetime
 
 import requests
 from django.shortcuts import render
-
+from .models import Dia, Codigo, Uf
 # Create your views here.
 from tmc_app.reglas import LISTADO_REGLAS, LISTADO_CODIGO_NO_REAJUSTABLE, LISTADO_CODIGO_REAJUSTABLE
-
 
 # method querying sbif service
 def request_sbif_service(date_into):
@@ -45,7 +44,11 @@ def valida_condition(condition, entry, type):
     if condition is None:
         return True
     for x in condition:
-        compare = condition_value(x.get('condicion'), entry, x.get(type))
+        if type == 'dias':
+            attribute = x.dias
+        else:
+            attribute = x.uf
+        compare = condition_value(x.condicion, entry, attribute)
         if not compare:
             return False
     return True
@@ -70,9 +73,9 @@ def valid_request(request):
 
 def valid_code(cod, exampleRadios):
     if exampleRadios == 'option1':
-        return cod in LISTADO_CODIGO_REAJUSTABLE
+        return cod.reajustable
     if exampleRadios == 'option2':
-        return cod in LISTADO_CODIGO_NO_REAJUSTABLE
+        return not cod.reajustable
     if exampleRadios == 'option3':
         return True
 
@@ -80,15 +83,22 @@ def valid_code(cod, exampleRadios):
 # method that compares sbif listing and values ​​entered by the user
 def compare_data(req, request):
     lista_final = []
-    mapRegla = LISTADO_REGLAS
+    list_tipos = []
     for x in req.get('TMCs'):
-        for y in mapRegla:
-            if x.get('Tipo') == y.get('codigo') and valid_code(int(x.get('Tipo')), request.POST['exampleRadios']):
-                if valida_condition(y.get('dia'), int(request.POST['plazo']), 'dias') \
-                        and valida_condition(y.get('uf'), float(request.POST['uf']), 'uf'):
-                    lista_final.append(x)
+        list_tipos.append(int(x.get('Tipo')))
+    list_code_db = Codigo.objects.filter(codigo__in=list_tipos)
+    for y in list_code_db:
+        if valid_code(y, request.POST['exampleRadios']):
+            if valida_condition(y.dia_set.filter(codigo_id=y.id), int(request.POST['plazo']),'dias') \
+                    and valida_condition(y.uf_set.filter(codigo_id=y.id), float(request.POST['uf']),'uf'):
+                lista_final.append(search(req.get('TMCs'),y))
     return lista_final
 
+
+def search(list, object):
+    for x in list:
+        if int(x.get('Tipo')) == object.codigo:
+            return x
 
 def message_error(text):
     return {"Mensaje": text}
@@ -111,15 +121,17 @@ def app_sbif(request):
     att = valid_request(request)
     if att is not None:
         return render(request, 'base.html', response_object(att, request))
-    req = request_sbif_service(request.POST['fecha'])
-    if req.get('CodigoHTTP') is not None:
-        return render(request, 'base.html', response_object(req, request))
-    lista_final = compare_data(req, request)
-    if not lista_final:
-        lista_final.append({"Titulo": "No se encontraron datos", "SubTitulo": "", "Valor": "Sin datos"})
+    try:
+        req = request_sbif_service(request.POST['fecha'])
+        if req.get('CodigoHTTP') is not None:
+            return render(request, 'base.html', response_object(req, request))
+        lista_final = compare_data(req, request)
+        if not lista_final:
+            lista_final.append({"Titulo": "No se encontraron datos", "SubTitulo": "", "Valor": "Sin datos"})
+            return render(request, 'base.html', {'result': lista_final, 'request': request_object(request)})
         return render(request, 'base.html', {'result': lista_final, 'request': request_object(request)})
-    return render(request, 'base.html', {'result': lista_final, 'request': request_object(request)})
-
+    except Exception:
+        return render(request, 'base.html', response_object(message_error("Se produjo un error en la solicitud"), request))
 
 # initial method
 def init_page(request):
