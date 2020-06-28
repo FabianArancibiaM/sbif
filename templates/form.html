@@ -4,12 +4,16 @@
             {% csrf_token %}
             <div class="form-group col-md-12">
                 <label>Ingresar monto UF :</label>
-                <input class="form-control" type="float" name="uf" value="{{ request.uf }}" required/>
+                <input class="form-control" type="text" name="uf" value="{{ request.uf }}" required
+                       onkeypress="return soloNumeros1(event)"/>
+                <label id="soloNumero1" style="display: none">solo numeros con decimal</label>
             </div>
 
             <div class="form-group col-md-12">
                 <label>Ingresar dias de atraso : </label>
-                <input class="form-control" type="number" name="plazo" value="{{ request.plazo }}" required/>
+                <input class="form-control" type="text" name="plazo" value="{{ request.plazo }}" required
+                       onkeypress="return soloNumeros2(event)"/>
+                <label id="soloNumero2" style="display: none">solo numeros sin decimal</label>
             </div>
             <div class="form-group col-md-12">
                 <label>Seleccionar Fecha :</label>
@@ -82,7 +86,31 @@
 {% endblock %}
 <script>
     function prueba() {
-        sp = document.getElementById('spinner_custom')
-        sp.setAttribute('style', 'display:block;margin-top: 3%;')
+        sp = document.getElementById('spinner_custom');
+        sp.setAttribute('style', 'display:block;margin-top: 3%;');
+    }
+
+    function soloNumeros1(e) {
+        sp = document.getElementById('soloNumero1');
+        patron = /^[0-9.]+$/;
+        return soloNumeros(e, sp,patron)
+    }
+
+    function soloNumeros2(e) {
+        sp = document.getElementById('soloNumero2');
+        patron = /^[0-9]+$/;
+        return soloNumeros(e, sp,patron)
+    }
+
+    function soloNumeros(e, sp, regex) {
+        sp.setAttribute('style', 'display:none;');
+        tecla = (document.all) ? e.keyCode : e.which;
+        if (tecla == 8) return true;
+        te = String.fromCharCode(tecla);
+        val = regex.test(te);
+        if (!val) {
+            sp.setAttribute('style', 'display:block;color: red;font-size: 14px;');
+        }
+        return val;
     }
 </script>

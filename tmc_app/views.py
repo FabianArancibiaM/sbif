@@ -2,9 +2,11 @@ from datetime import datetime
 
 import requests
 from django.shortcuts import render
-from .models import Dia, Codigo, Uf
+
+from .models import Codigo
+
+
 # Create your views here.
-from tmc_app.reglas import LISTADO_REGLAS, LISTADO_CODIGO_NO_REAJUSTABLE, LISTADO_CODIGO_REAJUSTABLE
 
 # method querying sbif service
 def request_sbif_service(date_into):
